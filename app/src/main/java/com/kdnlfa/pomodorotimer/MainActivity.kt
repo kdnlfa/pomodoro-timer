@@ -14,18 +14,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var phaseTextView: TextView
     private lateinit var timerTextView: TextView
     private lateinit var statusTextView: TextView
+    private lateinit var completedSessionsValueTextView: TextView
+    private lateinit var completedSessionsHintTextView: TextView
     private lateinit var focusDurationValueTextView: TextView
     private lateinit var breakDurationValueTextView: TextView
     private lateinit var settingsHintTextView: TextView
     private lateinit var focusDurationSlider: Slider
     private lateinit var breakDurationSlider: Slider
     private lateinit var autoStartSwitch: SwitchMaterial
+    private lateinit var clearStatsButton: MaterialButton
     private lateinit var startPauseButton: MaterialButton
     private lateinit var resetButton: MaterialButton
 
     private var countdownTimer: CountDownTimer? = null
     private var currentPhase: PomodoroPhase = PomodoroPhase.FOCUS
     private var pendingTransitionFrom: PomodoroPhase? = null
+    private var completedFocusSessions: Int = 0
     private var focusMinutes: Int = PomodoroSessionPlanner.DEFAULT_FOCUS_MINUTES
     private var breakMinutes: Int = PomodoroSessionPlanner.DEFAULT_BREAK_MINUTES
     private var remainingMillis: Long = durationFor(PomodoroPhase.FOCUS)
@@ -42,15 +46,22 @@ class MainActivity : AppCompatActivity() {
         phaseTextView = findViewById(R.id.phaseTextView)
         timerTextView = findViewById(R.id.timerTextView)
         statusTextView = findViewById(R.id.statusTextView)
+        completedSessionsValueTextView = findViewById(R.id.completedSessionsValueTextView)
+        completedSessionsHintTextView = findViewById(R.id.completedSessionsHintTextView)
         focusDurationValueTextView = findViewById(R.id.focusDurationValueTextView)
         breakDurationValueTextView = findViewById(R.id.breakDurationValueTextView)
         settingsHintTextView = findViewById(R.id.settingsHintTextView)
         focusDurationSlider = findViewById(R.id.focusDurationSlider)
         breakDurationSlider = findViewById(R.id.breakDurationSlider)
         autoStartSwitch = findViewById(R.id.autoStartSwitch)
+        clearStatsButton = findViewById(R.id.clearStatsButton)
         startPauseButton = findViewById(R.id.startPauseButton)
         resetButton = findViewById(R.id.resetButton)
 
+        completedFocusSessions = savedInstanceState?.getInt(KEY_COMPLETED_FOCUS_SESSIONS)
+            ?: preferences.getInt(PREFERENCE_COMPLETED_FOCUS_SESSIONS, 0)
+        completedFocusSessions =
+            PomodoroStatsTracker.sanitizeCompletedFocusSessions(completedFocusSessions)
         focusMinutes = savedInstanceState?.getInt(KEY_FOCUS_MINUTES)
             ?: preferences.getInt(
                 PREFERENCE_FOCUS_MINUTES,
@@ -104,6 +115,10 @@ class MainActivity : AppCompatActivity() {
             updateUi()
         }
 
+        clearStatsButton.setOnClickListener {
+            clearCompletedStats()
+        }
+
         startPauseButton.setOnClickListener {
             if (isRunning) {
                 pauseTimer()
@@ -125,6 +140,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        outState.putInt(KEY_COMPLETED_FOCUS_SESSIONS, completedFocusSessions)
         outState.putInt(KEY_FOCUS_MINUTES, focusMinutes)
         outState.putInt(KEY_BREAK_MINUTES, breakMinutes)
         outState.putString(KEY_CURRENT_PHASE, currentPhase.name)
@@ -163,6 +179,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handlePhaseFinished(finishedPhase: PomodoroPhase) {
+        completedFocusSessions = PomodoroStatsTracker.updatedCompletedFocusSessions(
+            completedFocusSessions = completedFocusSessions,
+            finishedPhase = finishedPhase
+        )
+        preferences.edit()
+            .putInt(PREFERENCE_COMPLETED_FOCUS_SESSIONS, completedFocusSessions)
+            .apply()
         currentPhase = PomodoroSessionPlanner.nextPhase(finishedPhase)
         remainingMillis = durationFor(currentPhase)
         countdownTimer = null
@@ -192,6 +215,15 @@ class MainActivity : AppCompatActivity() {
             updateUi()
             Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun clearCompletedStats() {
+        completedFocusSessions = 0
+        preferences.edit()
+            .putInt(PREFERENCE_COMPLETED_FOCUS_SESSIONS, completedFocusSessions)
+            .apply()
+        updateUi()
+        Toast.makeText(this, R.string.completed_sessions_cleared, Toast.LENGTH_SHORT).show()
     }
 
     private fun pauseTimer() {
@@ -259,6 +291,14 @@ class MainActivity : AppCompatActivity() {
             }
         )
         timerTextView.text = PomodoroTimeFormatter.format(remainingMillis)
+        completedSessionsValueTextView.text = getString(
+            R.string.completed_focus_sessions_value,
+            completedFocusSessions
+        )
+        completedSessionsHintTextView.text = getString(
+            R.string.completed_focus_sessions_hint,
+            completedFocusSessions
+        )
         focusDurationValueTextView.text = getString(R.string.minutes_value, focusMinutes)
         breakDurationValueTextView.text = getString(R.string.minutes_value, breakMinutes)
         settingsHintTextView.text = getString(
@@ -304,8 +344,10 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val PREFERENCES_NAME = "pomodoro_preferences"
         private const val PREFERENCE_AUTO_START_NEXT_PHASE = "autoStartNextPhase"
+        private const val PREFERENCE_COMPLETED_FOCUS_SESSIONS = "completedFocusSessions"
         private const val PREFERENCE_FOCUS_MINUTES = "focusMinutes"
         private const val PREFERENCE_BREAK_MINUTES = "breakMinutes"
+        private const val KEY_COMPLETED_FOCUS_SESSIONS = "completedFocusSessions"
         private const val KEY_FOCUS_MINUTES = "focusMinutes"
         private const val KEY_BREAK_MINUTES = "breakMinutes"
         private const val KEY_CURRENT_PHASE = "currentPhase"

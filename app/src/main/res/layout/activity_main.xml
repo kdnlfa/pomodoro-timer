@@ -18,7 +18,7 @@
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_v4"
+            android:text="@string/title_v5"
             android:textColor="@color/title_text"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/subtitle_v4"
+            android:text="@string/subtitle_v5"
             android:textColor="@color/body_text"
             android:textSize="14sp" />
 
@@ -75,6 +75,59 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/setting_auto_start_next_phase" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/phase_badge_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/completed_focus_sessions_title"
+                    android:textColor="@color/title_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/completedSessionsValueTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/completed_focus_sessions_default"
+                    android:textColor="@color/title_text"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:text="0 轮" />
+
+                <TextView
+                    android:id="@+id/completedSessionsHintTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/completed_focus_sessions_hint_default"
+                    android:textColor="@color/body_text"
+                    android:textSize="13sp"
+                    tools:text="累计完成 0 轮专注" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/clearStatsButton"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_clear_stats" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

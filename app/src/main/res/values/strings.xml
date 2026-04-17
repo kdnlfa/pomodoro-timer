@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">番茄钟</string>
-    <string name="title_v4">番茄钟 V4</string>
-    <string name="subtitle_v4">这一版可以自定义专注和休息时长。</string>
+    <string name="title_v5">番茄钟 V5</string>
+    <string name="subtitle_v5">这一版加入了已完成专注轮次统计。</string>
     <string name="default_time">25:00</string>
     <string name="default_focus_minutes">25 分钟</string>
     <string name="default_break_minutes">5 分钟</string>
+    <string name="completed_focus_sessions_default">0 轮</string>
+    <string name="completed_focus_sessions_hint_default">累计完成 0 轮专注</string>
     <string name="phase_focus">当前阶段：专注</string>
     <string name="phase_break">当前阶段：休息</string>
     <string name="status_focus_ready">准备开始 %1$d 分钟专注</string>
@@ -21,7 +23,12 @@
     <string name="action_continue_break">继续休息</string>
     <string name="action_pause">暂停</string>
     <string name="action_reset">重置</string>
+    <string name="action_clear_stats">清空统计</string>
     <string name="setting_auto_start_next_phase">自动进入下一阶段</string>
+    <string name="completed_focus_sessions_title">已完成专注轮次</string>
+    <string name="completed_focus_sessions_value">%1$d 轮</string>
+    <string name="completed_focus_sessions_hint">累计完成 %1$d 轮专注</string>
+    <string name="completed_sessions_cleared">统计已清空。</string>
     <string name="setting_duration_title">时长设置</string>
     <string name="setting_focus_duration">专注时长</string>
     <string name="setting_break_duration">休息时长</string>
