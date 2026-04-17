@@ -1,0 +1,8 @@
+<resources>
+    <color name="screen_background">#FFF7F2</color>
+    <color name="title_text">#3A201E</color>
+    <color name="body_text">#6B4A47</color>
+    <color name="seed">#C84B31</color>
+    <color name="launcher_background">#FFE3DC</color>
+</resources>
+

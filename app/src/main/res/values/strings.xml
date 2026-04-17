@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">番茄钟</string>
+    <string name="title_v1">番茄钟 V1</string>
+    <string name="subtitle_v1">先从一个固定 25 分钟的专注计时开始。</string>
+    <string name="default_time">25:00</string>
+    <string name="status_ready">准备开始第一轮专注</string>
+    <string name="status_running">专注进行中，继续保持</string>
+    <string name="status_paused">已暂停，你可以随时继续</string>
+    <string name="status_finished">这一轮已经完成</string>
+    <string name="action_start">开始</string>
+    <string name="action_pause">暂停</string>
+    <string name="action_reset">重置</string>
+    <string name="action_restart">重新开始</string>
+    <string name="pomodoro_finished">25 分钟到，辛苦了。</string>
+</resources>
+
