@@ -1,18 +1,20 @@
 <resources>
     <string name="app_name">番茄钟</string>
-    <string name="title_v3">番茄钟 V3</string>
-    <string name="subtitle_v3">这一版可以选择是否自动进入下一阶段。</string>
+    <string name="title_v4">番茄钟 V4</string>
+    <string name="subtitle_v4">这一版可以自定义专注和休息时长。</string>
     <string name="default_time">25:00</string>
+    <string name="default_focus_minutes">25 分钟</string>
+    <string name="default_break_minutes">5 分钟</string>
     <string name="phase_focus">当前阶段：专注</string>
     <string name="phase_break">当前阶段：休息</string>
-    <string name="status_focus_ready">准备开始 25 分钟专注</string>
+    <string name="status_focus_ready">准备开始 %1$d 分钟专注</string>
     <string name="status_focus_running">专注进行中，继续保持</string>
     <string name="status_focus_paused">专注已暂停，你可以随时继续</string>
-    <string name="status_break_ready">准备开始 5 分钟休息</string>
+    <string name="status_break_ready">准备开始 %1$d 分钟休息</string>
     <string name="status_break_running">休息进行中，稍微放松一下</string>
     <string name="status_break_paused">休息已暂停，你可以随时继续</string>
-    <string name="status_break_ready_after_focus">专注结束，准备开始 5 分钟休息</string>
-    <string name="status_focus_ready_after_break">休息结束，准备开始下一轮专注</string>
+    <string name="status_break_ready_after_focus">专注结束，准备开始 %1$d 分钟休息</string>
+    <string name="status_focus_ready_after_break">休息结束，准备开始 %1$d 分钟专注</string>
     <string name="action_start_focus">开始专注</string>
     <string name="action_start_break">开始休息</string>
     <string name="action_continue_focus">继续专注</string>
@@ -20,8 +22,14 @@
     <string name="action_pause">暂停</string>
     <string name="action_reset">重置</string>
     <string name="setting_auto_start_next_phase">自动进入下一阶段</string>
-    <string name="focus_finished_manual">25 分钟专注完成，准备休息。</string>
-    <string name="break_finished_manual">5 分钟休息结束，准备开始下一轮专注。</string>
-    <string name="focus_finished_auto_start">25 分钟专注完成，已自动开始休息。</string>
-    <string name="break_finished_auto_start">5 分钟休息结束，已自动开始下一轮专注。</string>
+    <string name="setting_duration_title">时长设置</string>
+    <string name="setting_focus_duration">专注时长</string>
+    <string name="setting_break_duration">休息时长</string>
+    <string name="minutes_value">%1$d 分钟</string>
+    <string name="settings_hint_saved">调整后的时长会自动保存到本地</string>
+    <string name="settings_hint_locked">计时进行中，时长设置已暂时锁定</string>
+    <string name="focus_finished_manual">%1$d 分钟专注完成，准备休息。</string>
+    <string name="break_finished_manual">%1$d 分钟休息结束，准备开始下一轮专注。</string>
+    <string name="focus_finished_auto_start">%1$d 分钟专注完成，已自动开始休息。</string>
+    <string name="break_finished_auto_start">%1$d 分钟休息结束，已自动开始下一轮专注。</string>
 </resources>

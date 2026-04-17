@@ -1,96 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp"
     android:background="@color/screen_background"
+    android:fillViewport="true"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_v3"
-        android:textColor="@color/title_text"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/subtitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/subtitle_v3"
-        android:textColor="@color/body_text"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/phaseTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/phase_badge_background"
-        android:paddingLeft="14dp"
-        android:paddingTop="8dp"
-        android:paddingRight="14dp"
-        android:paddingBottom="8dp"
-        android:text="@string/phase_focus"
-        android:textColor="@color/phase_badge_text"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        tools:text="当前阶段：专注" />
-
-    <TextView
-        android:id="@+id/timerTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/default_time"
-        android:textColor="@color/title_text"
-        android:textSize="56sp"
-        android:textStyle="bold"
-        tools:text="25:00" />
-
-    <TextView
-        android:id="@+id/statusTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/status_focus_ready"
-        android:textColor="@color/body_text"
-        android:textSize="16sp"
-        tools:text="准备开始 25 分钟专注" />
-
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/autoStartSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/setting_auto_start_next_phase" />
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/startPauseButton"
-            style="?attr/materialButtonOutlinedStyle"
+        <TextView
+            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/action_start_focus" />
+            android:text="@string/title_v4"
+            android:textColor="@color/title_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/resetButton"
+        <TextView
+            android:id="@+id/subtitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="@string/action_reset" />
+            android:layout_marginTop="8dp"
+            android:text="@string/subtitle_v4"
+            android:textColor="@color/body_text"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/phaseTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/phase_badge_background"
+            android:paddingLeft="14dp"
+            android:paddingTop="8dp"
+            android:paddingRight="14dp"
+            android:paddingBottom="8dp"
+            android:text="@string/phase_focus"
+            android:textColor="@color/phase_badge_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="当前阶段：专注" />
+
+        <TextView
+            android:id="@+id/timerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/default_time"
+            android:textColor="@color/title_text"
+            android:textSize="56sp"
+            android:textStyle="bold"
+            tools:text="25:00" />
+
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/status_focus_ready"
+            android:textColor="@color/body_text"
+            android:textSize="16sp"
+            tools:text="准备开始 25 分钟专注" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/autoStartSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/setting_auto_start_next_phase" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/phase_badge_background"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_duration_title"
+                android:textColor="@color/title_text"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/settingsHintTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/settings_hint_saved"
+                android:textColor="@color/body_text"
+                android:textSize="13sp"
+                tools:text="调整后的时长会自动保存到本地" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/setting_focus_duration"
+                    android:textColor="@color/title_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/focusDurationValueTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_focus_minutes"
+                    android:textColor="@color/title_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="25 分钟" />
+            </LinearLayout>
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/focusDurationSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/setting_break_duration"
+                    android:textColor="@color/title_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/breakDurationValueTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_break_minutes"
+                    android:textColor="@color/title_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="5 分钟" />
+            </LinearLayout>
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/breakDurationSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/startPauseButton"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_start_focus" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/resetButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/action_reset" />
+        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
