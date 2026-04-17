@@ -13,7 +13,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_v1"
+        android:text="@string/title_v2"
         android:textColor="@color/title_text"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -23,15 +23,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/subtitle_v1"
+        android:text="@string/subtitle_v2"
         android:textColor="@color/body_text"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/phaseTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/phase_badge_background"
+        android:paddingLeft="14dp"
+        android:paddingTop="8dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="8dp"
+        android:text="@string/phase_focus"
+        android:textColor="@color/phase_badge_text"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="当前阶段：专注" />
 
     <TextView
         android:id="@+id/timerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:text="@string/default_time"
         android:textColor="@color/title_text"
         android:textSize="56sp"
@@ -43,10 +59,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="@string/status_ready"
+        android:text="@string/status_focus_ready"
         android:textColor="@color/body_text"
         android:textSize="16sp"
-        tools:text="准备开始第一轮专注" />
+        tools:text="准备开始 25 分钟专注" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -60,7 +76,7 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/action_start" />
+            android:text="@string/action_start_focus" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/resetButton"
@@ -71,4 +87,3 @@
     </LinearLayout>
 
 </LinearLayout>
-

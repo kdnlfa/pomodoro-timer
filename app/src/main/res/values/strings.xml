@@ -1,16 +1,24 @@
 <resources>
     <string name="app_name">番茄钟</string>
-    <string name="title_v1">番茄钟 V1</string>
-    <string name="subtitle_v1">先从一个固定 25 分钟的专注计时开始。</string>
+    <string name="title_v2">番茄钟 V2</string>
+    <string name="subtitle_v2">这一版加入了专注和休息两个阶段。</string>
     <string name="default_time">25:00</string>
-    <string name="status_ready">准备开始第一轮专注</string>
-    <string name="status_running">专注进行中，继续保持</string>
-    <string name="status_paused">已暂停，你可以随时继续</string>
-    <string name="status_finished">这一轮已经完成</string>
-    <string name="action_start">开始</string>
+    <string name="phase_focus">当前阶段：专注</string>
+    <string name="phase_break">当前阶段：休息</string>
+    <string name="status_focus_ready">准备开始 25 分钟专注</string>
+    <string name="status_focus_running">专注进行中，继续保持</string>
+    <string name="status_focus_paused">专注已暂停，你可以随时继续</string>
+    <string name="status_break_ready">准备开始 5 分钟休息</string>
+    <string name="status_break_running">休息进行中，稍微放松一下</string>
+    <string name="status_break_paused">休息已暂停，你可以随时继续</string>
+    <string name="status_break_ready_after_focus">专注结束，准备开始 5 分钟休息</string>
+    <string name="status_focus_ready_after_break">休息结束，准备开始下一轮专注</string>
+    <string name="action_start_focus">开始专注</string>
+    <string name="action_start_break">开始休息</string>
+    <string name="action_continue_focus">继续专注</string>
+    <string name="action_continue_break">继续休息</string>
     <string name="action_pause">暂停</string>
     <string name="action_reset">重置</string>
-    <string name="action_restart">重新开始</string>
-    <string name="pomodoro_finished">25 分钟到，辛苦了。</string>
+    <string name="focus_finished">25 分钟专注完成，休息一下。</string>
+    <string name="break_finished">5 分钟休息结束，开始下一轮吧。</string>
 </resources>
-

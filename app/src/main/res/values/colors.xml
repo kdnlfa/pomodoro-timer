@@ -4,5 +4,6 @@
     <color name="body_text">#6B4A47</color>
     <color name="seed">#C84B31</color>
     <color name="launcher_background">#FFE3DC</color>
+    <color name="phase_badge_background">#F7D8C8</color>
+    <color name="phase_badge_text">#7A3424</color>
 </resources>
-
