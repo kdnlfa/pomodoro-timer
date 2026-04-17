@@ -13,7 +13,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_v2"
+        android:text="@string/title_v3"
         android:textColor="@color/title_text"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/subtitle_v2"
+        android:text="@string/subtitle_v3"
         android:textColor="@color/body_text"
         android:textSize="14sp" />
 
@@ -63,6 +63,13 @@
         android:textColor="@color/body_text"
         android:textSize="16sp"
         tools:text="准备开始 25 分钟专注" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/autoStartSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/setting_auto_start_next_phase" />
 
     <LinearLayout
         android:layout_width="wrap_content"

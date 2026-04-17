@@ -6,12 +6,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var phaseTextView: TextView
     private lateinit var timerTextView: TextView
     private lateinit var statusTextView: TextView
+    private lateinit var autoStartSwitch: SwitchMaterial
     private lateinit var startPauseButton: MaterialButton
     private lateinit var resetButton: MaterialButton
 
@@ -19,7 +21,11 @@ class MainActivity : AppCompatActivity() {
     private var currentPhase: PomodoroPhase = PomodoroPhase.FOCUS
     private var pendingTransitionFrom: PomodoroPhase? = null
     private var remainingMillis: Long = PomodoroSessionPlanner.durationFor(PomodoroPhase.FOCUS)
+    private var autoStartNextPhase: Boolean = false
     private var isRunning: Boolean = false
+    private val preferences by lazy {
+        getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         phaseTextView = findViewById(R.id.phaseTextView)
         timerTextView = findViewById(R.id.timerTextView)
         statusTextView = findViewById(R.id.statusTextView)
+        autoStartSwitch = findViewById(R.id.autoStartSwitch)
         startPauseButton = findViewById(R.id.startPauseButton)
         resetButton = findViewById(R.id.resetButton)
 
@@ -40,7 +47,18 @@ class MainActivity : AppCompatActivity() {
             ?.let(PomodoroPhase::valueOf)
         remainingMillis = savedInstanceState?.getLong(KEY_REMAINING_MILLIS)
             ?: PomodoroSessionPlanner.durationFor(currentPhase)
+        autoStartNextPhase = savedInstanceState?.getBoolean(KEY_AUTO_START_NEXT_PHASE)
+            ?: preferences.getBoolean(PREFERENCE_AUTO_START_NEXT_PHASE, false)
         isRunning = savedInstanceState?.getBoolean(KEY_IS_RUNNING) ?: false
+
+        autoStartSwitch.isChecked = autoStartNextPhase
+        autoStartSwitch.setOnCheckedChangeListener { _, isChecked ->
+            autoStartNextPhase = isChecked
+            preferences.edit()
+                .putBoolean(PREFERENCE_AUTO_START_NEXT_PHASE, isChecked)
+                .apply()
+            updateUi()
+        }
 
         startPauseButton.setOnClickListener {
             if (isRunning) {
@@ -66,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         outState.putString(KEY_CURRENT_PHASE, currentPhase.name)
         outState.putString(KEY_PENDING_TRANSITION_FROM, pendingTransitionFrom?.name)
         outState.putLong(KEY_REMAINING_MILLIS, remainingMillis)
+        outState.putBoolean(KEY_AUTO_START_NEXT_PHASE, autoStartNextPhase)
         outState.putBoolean(KEY_IS_RUNNING, isRunning)
     }
 
@@ -92,24 +111,37 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                val finishedPhase = currentPhase
-                currentPhase = PomodoroSessionPlanner.nextPhase(finishedPhase)
-                remainingMillis = PomodoroSessionPlanner.durationFor(currentPhase)
-                isRunning = false
-                pendingTransitionFrom = finishedPhase
-                countdownTimer = null
-                updateUi()
-                Toast.makeText(
-                    this@MainActivity,
-                    if (finishedPhase == PomodoroPhase.FOCUS) {
-                        R.string.focus_finished
-                    } else {
-                        R.string.break_finished
-                    },
-                    Toast.LENGTH_SHORT
-                ).show()
+                handlePhaseFinished(currentPhase)
             }
         }.start()
+    }
+
+    private fun handlePhaseFinished(finishedPhase: PomodoroPhase) {
+        currentPhase = PomodoroSessionPlanner.nextPhase(finishedPhase)
+        remainingMillis = PomodoroSessionPlanner.durationFor(currentPhase)
+        countdownTimer = null
+        isRunning = false
+
+        val toastMessageRes = when {
+            finishedPhase == PomodoroPhase.FOCUS && autoStartNextPhase ->
+                R.string.focus_finished_auto_start
+            finishedPhase == PomodoroPhase.FOCUS ->
+                R.string.focus_finished_manual
+            autoStartNextPhase ->
+                R.string.break_finished_auto_start
+            else ->
+                R.string.break_finished_manual
+        }
+
+        if (autoStartNextPhase) {
+            pendingTransitionFrom = null
+            Toast.makeText(this, toastMessageRes, Toast.LENGTH_SHORT).show()
+            startTimer()
+        } else {
+            pendingTransitionFrom = finishedPhase
+            updateUi()
+            Toast.makeText(this, toastMessageRes, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun pauseTimer() {
@@ -166,9 +198,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val PREFERENCES_NAME = "pomodoro_preferences"
+        private const val PREFERENCE_AUTO_START_NEXT_PHASE = "autoStartNextPhase"
         private const val KEY_CURRENT_PHASE = "currentPhase"
         private const val KEY_PENDING_TRANSITION_FROM = "pendingTransitionFrom"
         private const val KEY_REMAINING_MILLIS = "remainingMillis"
+        private const val KEY_AUTO_START_NEXT_PHASE = "autoStartNextPhase"
         private const val KEY_IS_RUNNING = "isRunning"
     }
 }
